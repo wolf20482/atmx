@@ -86,14 +86,14 @@ export const StartMenu = () => {
                         switch (ev.key) {
                             case 'new':
                                 Modal.confirm({
-                                    title: '新建',
+                                    title: 'New document',
                                     onOk: () => {
                                         localStorage.removeItem('content');
                                         window.location.reload();
                                     },
                                     content:
                                         <>
-                                            您当前的文本会被清除且无法恢复,请确保当前文本已保存或导出
+                                            Your current text will be erased and cannot be restored, please ensure that the current text has been saved or exported
                                         </>,
                                 });
                                 break;
@@ -101,8 +101,8 @@ export const StartMenu = () => {
                                 const reader = new FileReader();
                                 let file: Blob;
                                 reader.onload = (evt) => {
-                                    if (!evt.target || typeof evt.target.result !== 'string') return message.error(`打开失败`);
-                                    message.success(`已打开`);
+                                    if (!evt.target || typeof evt.target.result !== 'string') return message.error(`Failed to open`);
+                                    message.success(`Opened file`);
                                     //editor.children = JSON.parse(evt.target.result) as Descendant[];
                                     localStorage.setItem('content', evt.target.result);
                                     window.location.reload();
@@ -116,7 +116,7 @@ export const StartMenu = () => {
                                     }
                                 };
                                 Modal.confirm({
-                                    title: '打开文件',
+                                    title: 'Open file',
                                     onOk: () => {
                                         reader.readAsText(file);
                                     },
@@ -126,9 +126,9 @@ export const StartMenu = () => {
                                                 <p className="ant-upload-drag-icon">
                                                     <InboxOutlined />
                                                 </p>
-                                                <p className="ant-upload-text">点击或拖延文件到此处以打开</p>
+                                                <p className="ant-upload-text">Drag and drop or click to upload file</p>
                                                 <p className="ant-upload-hint">
-                                                    打开操作会覆盖您当前的文本，请确保当前文本已保存或导出
+                                                The open operation will overwrite your current text, please make sure the current text is saved or exported
                                                 </p>
                                             </Dragger>
                                         </>,
@@ -136,26 +136,36 @@ export const StartMenu = () => {
                                 break;
                             case 'export':
                                 Modal.confirm({
-                                    title: '导出为wikidot',
+                                    title: 'Export to Wikidot code',
                                     content:
                                         <>
                                             <pre id='export-output' dangerouslySetInnerHTML={{ __html: serialize(editor).serializeAll() }} />
-                                            <AntdButton id='export-copy' data-clipboard-action="copy" data-clipboard-target="#export-output">copy</AntdButton>
+                                            <AntdButton id='export-copy' data-clipboard-action="copy" data-clipboard-target="#export-output">Copy</AntdButton>
                                         </>,
                                 });
                                 break;
                             case 'save':
                                 saveAs(new Blob([JSON.stringify(initialValue)], { type: 'application/json' }), "atmx.json");
                                 break;
+                            case 'about':
+                                Modal.info({
+                                    title: 'About this app',
+                                    content:
+                                        <>
+                                            English WYSIWYG Editor for Wikidot code by Wolf20482. Original code by ZreXoc.
+                                            This is an experimental app, if you find any bugs, please DM Wolf20482#5951 on Discord or wolf20482 on Wikidot.</>
+                                });
+                                break;
                         }
                     }
                 }>
-                    <Menu.Item key='new'>新建</Menu.Item>
-                    <Menu.Item key='open'>打开</Menu.Item>
-                    <Menu.Item key='export'>导出</Menu.Item>
-                    <Menu.Item key='save'>保存到本地</Menu.Item>
+                    <Menu.Item key='new'>New</Menu.Item>
+                    <Menu.Item key='open'>Open</Menu.Item>
+                    <Menu.Item key='export'>Export</Menu.Item>
+                    <Menu.Item key='save'>Save</Menu.Item>
+                    <Menu.Item key='about'>About</Menu.Item>
                 </Menu>
-            }>开始</Dropdown.Button>
+            }>File</Dropdown.Button>
     </div>
 }
 export { ToolBar };

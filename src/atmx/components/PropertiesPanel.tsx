@@ -27,14 +27,13 @@ export const PropertiesPanel = () => {
         <Layout className='propertie-panel'>
             <Header className='site-layout-background'>
                 <Menu mode="horizontal" onSelect={(info) => setPage(info.key.toString())} defaultSelectedKeys={['1']}>
-                    <Menu.Item key="1">基本</Menu.Item>
-                    <Menu.Item key="2">nav 2</Menu.Item>
+                    <Menu.Item key="1">Text Color</Menu.Item>
                 </Menu>
             </Header>
             <Content className='site-layout-background'>
                 {page === '1' ?
                     <div>
-                        <span>text:{pureText?.map(n => n.join('')).join(' ')}</span>
+                        <span>Text that will have its color changed: {pureText?.map(n => n.join('')).join(' ')}</span>
                         <ColorPicker onChange={(color) => TextCommand.addMark('color', color.hex)} />
                     </div> : null}
             </Content>

@@ -14,7 +14,7 @@ const MyEditor: React.FC = () => {
     else {
         let key: string;
         Modal.confirm({
-            title: '初始化文本',
+            title: 'Create new document',
             onOk: () => {
                 if (optionalValues[key]) {
                     const content = JSON.stringify(optionalValues[key]);
@@ -97,7 +97,7 @@ const MyEditor: React.FC = () => {
                                 <Row>
                                     <Dropdown overlay={<QuickInsertMenu editor={editor} />}>
                                         <Typography.Link className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                                            快速插入<Icon.DownOutlined />
+                                            Add<Icon.DownOutlined />
                                         </Typography.Link>
                                     </Dropdown>
                                 </Row>
@@ -121,49 +121,49 @@ const MyEditor: React.FC = () => {
 }
 
 const optionalValues = {
-    withDefault: [{ "type": "paragraph", "children": [{ "text": "请输入文本" }] }],
+    withDefault: [{ "type": "paragraph", "children": [{ "text": "Choose a template to get started" }] }],
     withEmpty: [{ "type": "paragraph", "children": [{ "text": "" }] }],
     withStandardSCPFile: [
-        { "type": "paragraph", "children": [{ "text": "项目编号：", "bold": true }, { "text": "SCP-CN-XXXX" }] },
+        { "type": "paragraph", "children": [{ "text": "Item #: ", "bold": true }, { "text": "SCP-XXXX" }] },
         { "type": "paragraph", "children": [{ "text": "" }] },
-        { "type": "paragraph", "children": [{ "text": "项目等级：", "bold": true }, { "text": "Safe/Euclid/Keter" }] }, { "type": "paragraph", "children": [{ "text": "" }] },
-        { "type": "paragraph", "children": [{ "text": "特殊收容措施：", "bold": true }, { "text": "" }] },
+        { "type": "paragraph", "children": [{ "text": "Object Class: ", "bold": true }, { "text": "Safe/Euclid/Keter" }] }, { "type": "paragraph", "children": [{ "text": "" }] },
+        { "type": "paragraph", "children": [{ "text": "Special Containment Procedures: ", "bold": true }, { "text": "" }] },
         { "type": "paragraph", "children": [{ "text": "" }] },
-        { "type": "paragraph", "children": [{ "text": "描述：", "bold": true }, { "text": "" }] },
+        { "type": "paragraph", "children": [{ "text": "Description: ", "bold": true }, { "text": "" }] },
         { "type": "paragraph", "children": [{ "text": "" }] },
-        { "type": "paragraph", "children": [{ "text": "附录：", "bold": true }, { "text": "" }] }
+        { "type": "paragraph", "children": [{ "text": "Addendum", "bold": true }, { "text": "" }] }
     ],
     withSCPFileAndAppendix: [
-        { "type": "paragraph", "children": [{ "text": "项目编号：", "bold": true }, { "text": "SCP-CN-XXXX" }] },
+        { "type": "paragraph", "children": [{ "text": "Item #: ", "bold": true }, { "text": "SCP-XXXX" }] },
         { "type": "paragraph", "children": [{ "text": "" }] },
-        { "type": "paragraph", "children": [{ "text": "项目等级：", "bold": true }, { "text": "Safe/Euclid/Keter" }] }, { "type": "paragraph", "children": [{ "text": "" }] },
-        { "type": "paragraph", "children": [{ "text": "特殊收容措施：", "bold": true }, { "text": "" }] },
+        { "type": "paragraph", "children": [{ "text": "Object Class: ", "bold": true }, { "text": "Safe/Euclid/Keter" }] }, { "type": "paragraph", "children": [{ "text": "" }] },
+        { "type": "paragraph", "children": [{ "text": "Special Containment Procedures: ", "bold": true }, { "text": "" }] },
         { "type": "paragraph", "children": [{ "text": "" }] },
-        { "type": "paragraph", "children": [{ "text": "描述：", "bold": true }, { "text": "" }] },
+        { "type": "paragraph", "children": [{ "text": "Description: ", "bold": true }, { "text": "" }] },
     ]
 }
 
 const contentList = {
-    withEmpty: <p>(空)</p>,
+    withEmpty: <p>(Empty)</p>,
     withStandardSCPFile: <pre>
-        **项目编号：**SCP-CN-XXXX<br />
+        **Item #: **SCP-XXXX<br />
         <br />
-        **项目等级：**Safe/Euclid/Keter（表明分级）<br />
+        **Object Class: **Safe/Euclid/Keter/etc. <br />
         <br />
-        **特殊收容措施：**[说明收容措施的段落]<br />
+        **Special Containment Procedures: **[Insert special containment procedures here]<br />
         <br />
-        **描述：**[描述SCP的段落]
+        **Description: **[Describe your SCP here]
     </pre>,
     withSCPFileAndAppendix: <pre>
-        **项目编号：**SCP-CN-XXXX<br />
+        **Item #: **SCP-XXXX<br />
         <br />
-        **项目等级：**Safe/Euclid/Keter（表明分级）<br />
+        **Object Class: **Safe/Euclid/Keter/etc. <br />
         <br />
-        **特殊收容措施：**[说明收容措施的段落]<br />
+        **Special Containment Procedures: **[Insert special containment procedures here]<br />
         <br />
-        **描述：**[描述SCP的段落]<br />
+        **Description: **[Describe your SCP here]<br />
         <br />
-        **附录：**[可选的附加段落]
+        **Addendum: **[Insert addendum here]
     </pre>,
 };
 
@@ -171,15 +171,15 @@ const ValueInitializer: React.FC<{ editorValueKey: (v: string) => any }> = (prop
     const tabList = [
         {
             key: 'withEmpty',
-            tab: '空'
+            tab: 'Empty'
         },
         {
             key: 'withStandardSCPFile',
-            tab: '标准scp文档'
+            tab: 'Standard SCP File'
         },
         {
             key: 'withSCPFileAndAppendix',
-            tab: '带实验记录的scp文档'
+            tab: 'Standard SCP File with Addendum'
         },
     ];
 
@@ -194,7 +194,7 @@ const ValueInitializer: React.FC<{ editorValueKey: (v: string) => any }> = (prop
         <>
             <Card
                 style={{ width: '100%' }}
-                title="选择文档格式"
+                title="Choose template"
                 tabList={tabList}
                 activeTabKey={key}
                 onTabChange={onTabChange}

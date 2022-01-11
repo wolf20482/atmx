@@ -8,7 +8,7 @@ const nodeMap = {
     inline: {
         bold: {
             key: "bold",
-            title: "粗体(B)",
+            title: "Bold (Ctrl+B)",
             hotkey: "ctrl+b",
             achieve: () => command.toggleMark("bold"),
             render: (leaf: LeafRender) => leaf.appendClass("bold")
@@ -16,7 +16,7 @@ const nodeMap = {
 
         italic: {
             key: "italic",
-            title: "斜体(I)",
+            title: "Italic (Ctrl+I)",
             hotkey: "ctrl+i",
             achieve: () => command.toggleMark("italic"),
             render: (leaf: LeafRender) => leaf.appendClass("italic")
@@ -24,7 +24,7 @@ const nodeMap = {
 
         underline: {
             key: "underline",
-            title: "下划线(I)",
+            title: "Underline (Ctrl+U)",
             hotkey: "ctrl+u",
             achieve: () => command.toggleMark("underline"),
             render: (leaf: LeafRender) => leaf.appendClass("underline")
@@ -32,7 +32,7 @@ const nodeMap = {
 
         deleted: {
             key: "deleted",
-            title: "删除线(D)",
+            title: "Strikethrough (Ctrl+D)",
             hotkey: "ctrl+d",
             achieve: () => command.toggleMark("deleted"),
             render: (leaf: LeafRender) => leaf.appendClass("deleted")
@@ -40,13 +40,13 @@ const nodeMap = {
 
         link: {
             key: "link",
-            title: "链接",
+            title: "Link",
             achieve: () => {
                 if (command.isMarkActive('link')) return command.removeMark("link");
                 let url = window.prompt("Enter the URL of the link:");
-                if (!url) message.error("url不可为空");
+                if (!url) message.error("URL is empty.");
                 else if (!isUrl(url) && isUrl("http://" + url)) url = "http://" + url;
-                else message.error("不合法的url:" + url);
+                else message.error("Invalid URL:" + url);
                 command.toggleMark("link", { url })
             },
             render: (leafRender: LeafRender) => {
@@ -64,21 +64,21 @@ const nodeMap = {
         headerOne:
         {
             key: "header-one",
-            title: "一级标题(H)",
+            title: "Header 1 (Ctrl+Alt+H)",
             hotkey: "ctrl+alt+h",
             achieve: () => command.toggleBlock("header-one"),
             render: (props: RenderElementProps) => <h1 {...props.attributes}>{props.children}</h1>
         },
         headerTwo: {
             key: "header-two",
-            title: "二级标题",
+            title: "Header 2",
             achieve: () => command.toggleBlock("header-two"),
             render: (props: RenderElementProps) => <h2 {...props.attributes}>{props.children}</h2>
 
         },
         headerThree: {
             key: "header-three",
-            title: "三级标题",
+            title: "Header 3",
             achieve: () => command.toggleBlock("header-three"),
             render: (props: RenderElementProps) => <h3 {...props.attributes}>{props.children}</h3>
         },
@@ -86,7 +86,7 @@ const nodeMap = {
         //text-align
         textAlign: {
             key: "text-align",
-            title: "对齐",
+            title: "Text Align",
             isActive: (editor: Editor, attr: any) => {
                 const alignType = attr.alignType;
                 if (!(alignType && ["left", "center", "right"].includes(alignType))) return false
@@ -160,13 +160,13 @@ const nodeMap = {
                 }, */
         blockquote: {
             key: "block-quote",
-            title: "引用",
+            title: "Blockquote",
             achieve: (editor: Editor) => command.toggleBlock("block-quote", { nested: true }),
             render: (props: RenderElementProps) => <blockquote {...props.attributes}>{props.children}</blockquote>
         },
         numberedList: {
             key: "numbered-list",
-            title: "有序列表",
+            title: "Numbered List",
             achieve: (editor: Editor) => {
                 const isActive = command.isBlockActive("numbered-list");
                 command.toggleBlock('numbered-list', { nested: true, split: true })
@@ -182,7 +182,7 @@ const nodeMap = {
         },
         bulletedList: {
             key: "bulleted-list",
-            title: "无序列表",
+            title: "Bulleted List",
             achieve: (editor: Editor) => {
                 const isActive = command.isBlockActive("bulleted-list");
                 command.toggleBlock('bulleted-list', { nested: true, split: true })
@@ -202,7 +202,7 @@ const nodeMap = {
         },
         horizontalLine: {
             key: "horizontal-line",
-            title: "分割线",
+            title: "Horizontal Line",
             achieve: () => command.insertVoid({ type: 'horizontal-line', children: [{ text: '' }] }),
             render: (props: RenderElementProps) => <span className="void" {...props.attributes}><hr />{props.children}</span>,
             isVoid: true
