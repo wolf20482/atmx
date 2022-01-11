@@ -29,5 +29,22 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-analytics.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAd3SEAvHpqcnOzSBXwBlaUbQy20WnWck4",
+        authDomain: "atmxwikidot.firebaseapp.com",
+        projectId: "atmxwikidot",
+        storageBucket: "atmxwikidot.appspot.com",
+        messagingSenderId: "359288835237",
+        appId: "1:359288835237:web:02db827dd7123cbf55d14c",
+        measurementId: "G-7GFLNXJND7"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
   </body>
 </html>
