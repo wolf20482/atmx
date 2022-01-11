@@ -1,5 +1,5 @@
 import { Descendant } from "slate";
 
-const DefaultValue: Descendant[] = [{ "type": "paragraph", "children": [{ "text": "请输入文本" }] }]
+const DefaultValue: Descendant[] = [{ "type": "paragraph", "children": [{ "text": "Empty document" }] }]
 
 export const useDefaultValue = (): Descendant[] => DefaultValue;
